@@ -1,3 +1,4 @@
+import os
 import pytest
 from pathlib import Path
 from datetime import datetime
@@ -15,7 +16,10 @@ BASE_URL = "https://www.saucedemo.com/"
 @pytest.fixture(scope="session")
 def browser():
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=False)  # headed by default; CI can override
+        # GitHub Actions CI ortamında CI="true" gelir.
+        # Lokal: headed (pencere açık) / CI: headless
+        headless = os.getenv("CI", "").lower() == "true" or os.getenv("PW_HEADLESS", "") in ("1", "true")
+        browser = p.chromium.launch(headless=headless)
         yield browser
         browser.close()
 
