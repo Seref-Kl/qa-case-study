@@ -7,7 +7,7 @@ k6 run k6/graphql/rickmorty-characters.js || true
 
 echo "==> Setting up Python environment"
 python3 -m pip install -U pip
-pip3 install -r playwright-python/requirements.txt
+pip install -r playwright-python/requirements.txt
 python3 -m playwright install --with-deps chromium
 
 echo "==> Running Playwright tests"

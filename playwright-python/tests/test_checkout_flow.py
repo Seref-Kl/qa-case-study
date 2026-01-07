@@ -58,6 +58,7 @@ def test_checkout_until_summary(page: Page):
     page.fill("[data-test='postalCode']", "12345")
     page.click("[data-test='continue']")
 
+
     # Sipariş özetini kontrol et
     expect(page.locator(".summary_total_label")).to_contain_text("Total")
     expect(page.locator(".cart_item .inventory_item_name")).to_contain_text("Sauce Labs Backpack")
